@@ -64,8 +64,8 @@ const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
                 )} />
 
                 <div className="flex flex-col md:flex-row gap-4">
-                    <FormField className="flex-1" control={form.control} name="address" render={({ field }) => (
-                        <FormItem>
+                    <FormField control={form.control} name="address" render={({ field }) => (
+                        <FormItem className="flex-1" >
                             <FormLabel>Address</FormLabel>
                             <FormControl>
                                 <Input {...field} className="bg-white" />
