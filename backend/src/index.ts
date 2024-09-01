@@ -9,12 +9,7 @@ mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string).then(() => con
 const app = express();
 
 app.use(express.json())
-app.use(cors({
-    origin: process.env.FRONTEND_DOMAIN,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
-}));
+app.use(cors());
 
 app.get("/health", async (req: Request, res: Response) => {
     res.send({ message: "health ok!" })
