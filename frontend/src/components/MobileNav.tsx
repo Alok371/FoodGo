@@ -20,7 +20,9 @@ export default function MobileNav() {
                 </SheetTitle>
                 <Separator />
                 <SheetDescription className="flex flex-col gap-4">
-                    {isAuthenticated ? (<MobileNavLinks />) :
+                    {isAuthenticated ? (
+                        <MobileNavLinks />
+                    ) :
                         (<Button className="flex-1 font-bold bg-orange-500"
                             onClick={async () => {
                                 await loginWithRedirect()
