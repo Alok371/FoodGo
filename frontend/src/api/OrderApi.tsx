@@ -75,11 +75,13 @@ export const useCreateCheckoutSession = () => {
                 throw new Error("Unable to create checkout session");
             }
 
-            // Get the URL to redirect to from the response
             const data = await response.json();
 
-            // Redirect the user to the order status page
-            window.location.href = data.url;
+            if (!data.url) {
+                throw new Error("Checkout session URL not found");
+            }
+
+            return data;
 
         } catch (error: any) {
             console.error("Error creating checkout session:", error);

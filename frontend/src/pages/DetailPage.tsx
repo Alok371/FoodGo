@@ -101,8 +101,8 @@ const DetailPage = () => {
             },
         };
 
-        // const data = await createCheckoutSession(checkoutData);
-        // window.location.href = data.url;
+        const data = await createCheckoutSession(checkoutData);
+        window.location.href = data.url;
     };
 
     if (isLoading || !restaurant) {
