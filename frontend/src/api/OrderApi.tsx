@@ -77,8 +77,8 @@ export const useCreateCheckoutSession = () => {
 
             const data = await response.json();
 
-            if (!data.url) {
-                throw new Error("Checkout session URL not found");
+            if (!data.url || !data.totalAmount) {
+                throw new Error("Checkout session details missing");
             }
 
             return data;

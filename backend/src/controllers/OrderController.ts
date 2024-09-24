@@ -48,6 +48,8 @@ const createCheckoutSession = async (req: Request, res: Response) => {
       if (!menuItem) {
         throw new Error(`Menu item not found: ${item.menuItemId}`);
       }
+      console.log('MenuItem Price:', menuItem.price);
+      console.log('Quantity:', item.quantity);
       totalAmount += menuItem.price * parseInt(item.quantity);
     });
 
@@ -58,7 +60,7 @@ const createCheckoutSession = async (req: Request, res: Response) => {
       status: "placed",
       deliveryDetails: checkoutSessionRequest.deliveryDetails,
       cartItems: checkoutSessionRequest.cartItems,
-      totalAmount,  // Set the calculated totalAmount here
+      totalAmount,
       createdAt: new Date(),
     });
     await newOrder.save();
@@ -66,8 +68,7 @@ const createCheckoutSession = async (req: Request, res: Response) => {
     // Skip payment and directly redirect to the order status page
     const successUrl = `${FRONTEND_URL}/order-status?success=true&orderId=${newOrder._id}`;
 
-    // Return the success URL to redirect the user
-    res.json({ url: successUrl });
+    res.json({ url: successUrl, totalAmount });
   } catch (error: any) {
     console.log(error);
     res.status(500).json({ message: error.message });
